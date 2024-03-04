@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App clima</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="climaContenedor">
+        <h1>Informacion sobre tu clima</h1>
+        <div class="resultado">
+            <p>Seleccione ciudad y pais</p>
+            <h5 class="nombreCiudadSeleccionada">Clima en ----</h5>
+            <img class="iconoClima" src="" alt="">
+            <h2 class="temperaturaActual">-°C</h2>
+            <p class="temperaturaMax">Max: -°C</p>
+            <p class="temperaturaMin">Min: -°C</p>
+        </div>
+
+        <form action="" method="post" class="getClima">
+            <input type="text"  name="ciudad" id="ciudad" placeholder="Escribe tu ciudad">
+            <select name="" id="pais">
+                <option value=""></option>
+                <option value="AR">Argentina</option>
+                <option value="CO">Colombia</option>
+                <option value="CR">Costa rica</option>
+                <option value="ES">España</option>
+                <option value="US">Estados Unidos</option>
+                <option value="MX">Mexico</option>
+                <option value="PE">Peru</option>
+            </select>
+            <input type="submit" name="" id="" value="Buscar clima">
+        </form>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
