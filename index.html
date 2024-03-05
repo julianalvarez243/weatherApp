@@ -10,26 +10,18 @@
     <div class="climaContenedor">
         <h1>Informacion sobre tu clima</h1>
         <div class="resultado">
-            <p>Seleccione ciudad y pais</p>
-            <h5 class="nombreCiudadSeleccionada">Clima en ----</h5>
+            <h2 class="nombreCiudadSeleccionada">Clima en ----</h2>
             <img class="iconoClima" src="" alt="">
-            <h2 class="temperaturaActual">-°C</h2>
-            <p class="temperaturaMax">Max: -°C</p>
-            <p class="temperaturaMin">Min: -°C</p>
+            <h5 class="temperaturaActual">-°C</h5>
+            <div class="datosClima">
+            <h5 class="temperaturaSensacion">Sensacion termica: -°C</h5>
+            <h5 class="humedadPorcentaje">Humedad: -%</h5>
+            <h5 class="vientoKm">Viento: - Km/H</h5>
+        </div>
         </div>
 
         <form action="" method="post" class="getClima">
-            <input type="text"  name="ciudad" id="ciudad" placeholder="Escribe tu ciudad">
-            <select name="" id="pais">
-                <option value=""></option>
-                <option value="AR">Argentina</option>
-                <option value="CO">Colombia</option>
-                <option value="CR">Costa rica</option>
-                <option value="ES">España</option>
-                <option value="US">Estados Unidos</option>
-                <option value="MX">Mexico</option>
-                <option value="PE">Peru</option>
-            </select>
+            <input type="text"  name="ciudad" id="ciudad" placeholder="Escribe tu ciudad"> <br>
             <input type="submit" name="" id="" value="Buscar clima">
         </form>
     </div>

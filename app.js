@@ -6,17 +6,17 @@ let form = document.querySelector('.getClima');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    if (nombreCiudad.value === '' || nombrePais.value === '') {
-        mostrarError('Ambos campos deben estar completos');
+    if (nombreCiudad.value === '') {
+        mostrarError('Debe ingresar una ciudad.');
         return;
     } 
 
-    llamarApi(nombreCiudad.value, nombrePais.value);
+    llamarApi(nombreCiudad.value);
 })
 
-function llamarApi(ciudad, pais) {
+function llamarApi(ciudad) {
     const apiKey = 'e83e708f0a139a4b7e78f40fff80286d';
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${apiKey}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&lang=sp&appid=${apiKey}`;
 
     fetch(url)
          .then(data => {
@@ -34,23 +34,26 @@ function llamarApi(ciudad, pais) {
 }
 
 function mostrarClima(data) {
-    let {name, main:{temp, temp_min, temp_max}, weather:[arr]} = data;
+    let {name, main:{temp, feels_like, humidity}, weather:[arr], wind:{speed}} = data;
 
+    let sensacion = kelvinHaciaCelcius(feels_like);
     let grados = kelvinHaciaCelcius(temp);
-    let min = kelvinHaciaCelcius(temp_min);
-    let max = kelvinHaciaCelcius(temp_max);
+    let viento = metrosHaciaKilometros(speed);
     let icono = document.querySelector('.iconoClima')
+
     document.querySelector('.nombreCiudadSeleccionada').innerHTML = `Clima en ${name}`;
 
     icono.style.display = "block";
 
     icono.src = `https://openweathermap.org/img/wn/${arr.icon}@2x.png`;
 
-    document.querySelector('.temperaturaActual').innerHTML = `${grados}°C`;
+    document.querySelector('.temperaturaActual').innerHTML = `${arr.description} ${grados}°C`;
 
-    document.querySelector('.temperaturaMax').innerHTML = `Max: ${max}°C`;
+    document.querySelector('.temperaturaSensacion').innerHTML = `Sensacion termica: ${sensacion}°C`;
 
-    document.querySelector('.temperaturaMin').innerHTML = `Min: ${min}°C`;
+    document.querySelector('.humedadPorcentaje').innerHTML = `Humedad: ${humidity}%`;
+
+    document.querySelector('.vientoKm').innerHTML = `Viento: ${viento} Km/H`;
 }
 
 function mostrarError(mensaje) {
@@ -70,9 +73,9 @@ function kelvinHaciaCelcius(gradosK) {
 }
 
 function limpiarHTML() {
-    document.querySelector('.temperaturaMax').innerHTML = `Max: -°C`;
+    document.querySelector('.humedadPorcentaje').innerHTML = `Humedad: -%`;
 
-    document.querySelector('.temperaturaMin').innerHTML = `Min: -°C`;
+    document.querySelector('.vientoKm').innerHTML = `Viento: - Km/H`;
 
     document.querySelector('.temperaturaActual').innerHTML = `-°C`;
 
@@ -80,8 +83,8 @@ function limpiarHTML() {
     
     let icono = document.querySelector('.iconoClima')
     icono.style.display = "none";
+}
 
-    
-
-    
+function metrosHaciaKilometros(metros) {
+    return parseFloat((metros * 3.6).toFixed(2));
 }
